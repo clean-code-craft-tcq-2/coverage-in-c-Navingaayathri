@@ -39,8 +39,8 @@ struct TemperatureLimit
 
 struct TemperatureLimit limit[COOLING_TYPE];
 
-int sendToController(BreachType breachType);
-int sendToEmail(BreachType breachType);
+void sendToController(BreachType breachType);
+void sendToEmail(BreachType breachType);
 
 /* structure for cooling type limits  */
 struct TemperatureLimit limit[COOLING_TYPE]={
