@@ -19,16 +19,16 @@ REQUIRE(inferBreach(MED_ACTIVE_COOLING, 46)== TOO_HIGH);
 TEST_CASE("check the breach type and alert selected target")
 {
  BatteryCharacter batteryChar = {MED_ACTIVE_COOLING, "OKAYA"};
- REQUIRE(checkAndAlert(TO_CONTROLLER, batteryChar, -99) ==0);
- REQUIRE(checkAndAlert(TO_EMAIL,batteryChar,22) == 1);
+ REQUIRE(checkAndAlert(TO_CONTROLLER, batteryChar, -99) == 1);
+ REQUIRE(checkAndAlert(TO_EMAIL,batteryChar,22) == 0);
 }
   
 TEST_CASE("selection of target for breach alert")
 {
-REQUIRE(selectTarget(TO_CONTROLLER,NORMAL)==0);
-REQUIRE(selectTarget(TO_EMAIL,TOO_LOW)==1);
-REQUIRE(selectTarget(TO_CONTROLLER,TOO_HIGH)==0);
-REQUIRE(selectTarget(TO_EMAIL,TOO_HIGH)==1);
+REQUIRE(selectTarget(TO_CONTROLLER,NORMAL)==1);
+REQUIRE(selectTarget(TO_EMAIL,TOO_LOW)==0);
+REQUIRE(selectTarget(TO_CONTROLLER,TOO_HIGH)==1);
+REQUIRE(selectTarget(TO_EMAIL,TOO_HIGH)==0);
 }
 
 TEST_CASE("check and print alert to controller")
