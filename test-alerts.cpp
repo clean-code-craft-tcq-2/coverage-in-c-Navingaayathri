@@ -23,7 +23,7 @@ TEST_CASE("check the breach type and alert selected target")
  REQUIRE(checkAndAlert(TO_EMAIL,batteryChar,22) == 1);
 }
   
-TESTCASE("selection of target for breach alert")
+TEST_CASE("selection of target for breach alert")
 {
 REQUIRE(selectTarget(TO_CONTROLLER,NORMAL)==0);
 REQUIRE(selectTarget(TO_EMAIL,TOO_LOW)==1);
@@ -31,13 +31,13 @@ REQUIRE(selectTarget(TO_CONTROLLER,TOO_HIGH)==0);
 REQUIRE(selectTarget(TO_EMAIL,TOO_HIGH)==1);
 }
 
-TESTCASE("check and print alert to controller")
+TEST_CASE("check and print alert to controller")
 {
 REQUIRE(sendToController(TOO_LOW)==0);
 REQUIRE(sendToController(TOO_HIGH)==0);
 }
 
-TESTCASE("check and print alert to mail")
+TEST_CASE("check and print alert to mail")
 {
 REQUIRE(sendToEmail(TOO_LOW)==0);
 REQUIRE(sendToEmail(TOO_HIGH)==0);
