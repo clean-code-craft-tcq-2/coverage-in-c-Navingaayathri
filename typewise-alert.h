@@ -36,5 +36,8 @@ typedef struct
   int upperLimit;
 }TemperatureLimit;
 
-int sendToController(BreachType breachType);
-int sendToEmail(BreachType breachType);
+BreachType inferBreach(CoolingType coolingType, double temperatureInC);
+extern int checkAndAlert(AlertTarget alertTarget, BatteryCharacter batteryChar, double temperatureInC); 
+extern int selectTarget(AlertTarget alertTarget,BreachType breachType);
+extern int sendToController(BreachType breachType);
+extern int sendToEmail(BreachType breachType);
