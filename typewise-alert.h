@@ -1,8 +1,4 @@
 #include <stdio.h>
-#include <string.h>
-#include <stdint.h>
-#include <stdbool.h>
-#include <assert.h>
 
 #define PASSIVE_COOLING_LOWER_LIM 0
 #define PASSIVE_COOLING_UPPER_LIM 35
