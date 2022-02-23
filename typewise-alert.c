@@ -1,48 +1,53 @@
 #include "typewise-alert.h"
 #include <stdio.h>
 
+const char *BreachMessage[] = {"Hi, the battery temperature is NORMAL!\n", "Hi, the temperature is TOO LOW\n", "Hi, the temperature is TOO HIGH\n"};
 
-/* check the input value and return the required cooling type  */
+TemperatureLimit limitCategory[COOLING_TYPE]={
+{PASSIVE_COOLING_LOWER_LIM,PASSIVE_COOLING_UPPER_LIM}, 
+{HI_ACTIVE_COOLING_LOWER_LIM,HI_ACTIVE_COOLING_UPPER_LIM},
+{MED_ACTIVE_COOLING_LOWER_LIM,MED_ACTIVE_COOLING_UPPER_LIM}
+};
+
+/* check the input value and return breach type  */
 BreachType inferBreach(CoolingType coolingType, double temperatureInC) 
 {
- if(temperatureInC < limit[coolingType].lowerLimit) 
+ if(temperatureInC < limitCategory[coolingType].lowerLimit) 
   {
     return TOO_LOW;
   }
-  if(temperatureInC > limit[coolingType].upperLimit) 
+  if(temperatureInC > limitCategory[coolingType].upperLimit) 
   {
     return TOO_HIGH;
   }
-  return NORMAL;
+    return NORMAL;
 }
 
-/* Alert target selection  */
-const char *BreachMessage[] = {"Hi, battery temperature is Ok\n", "Hi, the temperature is too low\n", "Hi, the temperature is too high\n"};
-
-BreachType checkAndAlert(AlertTarget alertTarget, BatteryCharacter batteryChar, double temperatureInC) 
+int checkAndAlert(AlertTarget alertTarget, BatteryCharacter batteryChar, double temperatureInC) 
 {
 BreachType breachType = inferBreach(batteryChar.coolingType, temperatureInC);
-int Target1 = (alertTarget == TO_CONTROLLER) ? sendToController(breachType) : sendToEmail(breachType);
-int Target2 = (alertTarget == TO_EMAIL) ? sendToEmail(breachType) : sendToController(breachType);
-int Target = Target1 | Target2;
-return Target;
+return selectTarget(alertTarget,breachType);
 }
 
-void sendToController(BreachType breachType) {
-  const unsigned short header = 0xfeed;
-  printf("%x : %x\n", header, breachType);
+/* Alert target selection */
+int selectTarget(AlertTarget alertTarget,BreachType breachType)
+{
+	if(alertTarget == TO_CONTROLLER)
+	{
+    return sendToController(breachType);
+	}
+    return sendToEmail(breachType);
 }
 
-void sendToEmail(BreachType breachType) {
+int sendToController(BreachType breachType) {
+const unsigned short header = 0xfeed;
+printf("%x : %x\n", header, breachType);
+return 0;
+}
+
+int sendToEmail(BreachType breachType) {
 const char* recipient = "a.b@c.com";
 printf("To: %s\n", recipient);
 printf("%s\n",BreachMessage[breachType]);
+return 0;
 }
-
-
-
-
- 
-
-
-
