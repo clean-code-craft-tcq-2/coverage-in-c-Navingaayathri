@@ -1,4 +1,4 @@
-#include <stdio.h>
+#pragma once
 
 #define PASSIVE_COOLING_LOWER_LIM 0
 #define PASSIVE_COOLING_UPPER_LIM 35
