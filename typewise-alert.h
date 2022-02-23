@@ -1,12 +1,15 @@
-#pragma once
+#include <stdio.h>
+#include <string.h>
+#include <stdint.h>
+#include <stdbool.h>
+#include <assert.h>
 
 #define PASSIVE_COOLING_LOWER_LIM 0
 #define PASSIVE_COOLING_UPPER_LIM 35
 #define HI_ACTIVE_COOLING_LOWER_LIM 0
 #define HI_ACTIVE_COOLING_UPPER_LIM 45
 #define MED_ACTIVE_COOLING_LOWER_LIM 0
-#define MED_ACTIVE_COOLING_UPPER_LIM 35
-
+#define MED_ACTIVE_COOLING_UPPER_LIM 40
 
 typedef enum {
   PASSIVE_COOLING,
@@ -31,20 +34,11 @@ typedef struct {
   char brand[48];
 } BatteryCharacter;
 
-struct TemperatureLimit
+typedef struct 
 {
   int lowerLimit;
   int upperLimit;
-};
+}TemperatureLimit;
 
-struct TemperatureLimit limit[COOLING_TYPE];
-
-void sendToController(BreachType breachType);
-void sendToEmail(BreachType breachType);
-
-/* structure for cooling type limits  */
-struct TemperatureLimit limit[COOLING_TYPE]={
-{PASSIVE_COOLING_LOWER_LIM,PASSIVE_COOLING_UPPER_LIM}, 
-{HI_ACTIVE_COOLING_LOWER_LIM,HI_ACTIVE_COOLING_UPPER_LIM},
-{MED_ACTIVE_COOLING_LOWER_LIM,MED_ACTIVE_COOLING_UPPER_LIM}
-};
+int sendToController(BreachType breachType);
+int sendToEmail(BreachType breachType);
