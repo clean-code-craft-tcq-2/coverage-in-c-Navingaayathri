@@ -49,10 +49,12 @@ TEST_CASE("check the breach type and alert selected target - 3")
   
 TEST_CASE("selection of target for breach alert")
 {
-REQUIRE(selectTarget(TO_CONTROLLER,NORMAL)==0);
+REQUIRE(selectTarget(TO_CONTROLLER,TOO_LOW)==0);
 REQUIRE(selectTarget(TO_EMAIL,TOO_LOW)==0);
 REQUIRE(selectTarget(TO_CONTROLLER,TOO_HIGH)==0);
 REQUIRE(selectTarget(TO_EMAIL,TOO_HIGH)==0);
+REQUIRE(selectTarget(TO_CONTROLLER,NORMAL)==0);
+REQUIRE(selectTarget(TO_EMAIL,NORMAL)==0);
 }
 
 TEST_CASE("check and print alert to controller")
