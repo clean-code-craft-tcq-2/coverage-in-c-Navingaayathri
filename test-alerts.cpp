@@ -59,10 +59,12 @@ TEST_CASE("check and print alert to controller")
 {
 REQUIRE(sendToController(TOO_LOW)==0);
 REQUIRE(sendToController(TOO_HIGH)==0);
+REQUIRE(sendToController(NORMAL)==0;
 }
 
 TEST_CASE("check and print alert to mail")
 {
 REQUIRE(sendToEmail(TOO_LOW)==0);
 REQUIRE(sendToEmail(TOO_HIGH)==0);
+REQUIRE(sendToEmail(NORMAL)==0);
 }
